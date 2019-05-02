@@ -36,6 +36,7 @@ namespace AgeM2I.Classes
         public void Impot()
         {
             decimal tmp = 0;
+            Caisse -= 100;
             foreach(Village v in Villages)
             {
                 decimal impot = v.Impot();
@@ -66,11 +67,24 @@ namespace AgeM2I.Classes
         public override string ToString()
         {
             string res = "";
+            int popultation = 0;
+            foreach(Village v in Villages)
+            {
+                popultation += v.Habitants.Count;
+            }
             res += "Age royaume : " + Age;
             res += "\nProductivité du royaume : " + Production;
             res += "\nNombre de village : " + Villages.Count;
+            res += "\nNombre d'habitants : " + popultation;
             res += "\nCaisse : " + Caisse;
             return res;
+        }
+
+        public void Mourir()
+        {
+            Random r = new Random();
+            int index = r.Next(0, Villages.Count-1);
+            Villages[index].Mourir();
         }
     }
 }

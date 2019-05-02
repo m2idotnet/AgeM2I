@@ -47,16 +47,18 @@ namespace AgeM2I.Classes
                 }
                 else if(v.GetType() == typeof(Roturier))
                 {
-                    impot += v.Pdv * 0.5M;
+                    impot += v.Pdv /2;
                     v.Pdv = v.Pdv / 2;
                 }
             }
             return impot;
         }
 
-        public void Mourir(Villageois v)
+        public void Mourir()
         {
-
+            Random r = new Random();
+            int index = r.Next(0, Habitants.Count - 1);
+            Habitants.RemoveAt(index);
         }
     }
 }

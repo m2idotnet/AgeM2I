@@ -17,6 +17,10 @@ namespace AgeM2I.Classes
             r.Produire();
             r.Vieillir();
             r.PossibleImpot = true;
+            if(r.Age%10 == 0)
+            {
+                r.Mourir();
+            }
             return true;
         }
     }

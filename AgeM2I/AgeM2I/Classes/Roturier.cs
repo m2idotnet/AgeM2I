@@ -9,12 +9,12 @@ namespace AgeM2I.Classes
         public Roturier()
         {
             capaciteMax = 1000;
-            pdv = 50;
+            Pdv = 50;
         }
 
         public override void Gain()
         {
-            pdv += pdv * 1.5M;
+            Pdv += Pdv * 1.5M;
         }
     }
 }
