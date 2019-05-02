@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgeM2I.Classes;
+using System;
 
 namespace AgeM2I
 {
@@ -6,7 +7,9 @@ namespace AgeM2I
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Jeu j = new Jeu();
+            j.Init();
+            Console.ReadLine();
         }
     }
 }

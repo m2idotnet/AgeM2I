@@ -29,6 +29,7 @@ namespace AgeM2I.Classes
             decimal production = 0;
             foreach(Villageois v in Habitants)
             {
+                v.Gain();
                 production += v.Pdv;
             }
             return production;
