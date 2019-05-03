@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AgeM2I.Classes
 {
-    class Paysan : Villageois
+    public class Paysan : Roturier
     {
         public Paysan()
         {

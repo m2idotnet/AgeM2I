@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AgeM2I.Classes
 {
-    public abstract class Villageois
+    public class Villageois : IVillageois
     {
         private int vie;
         protected decimal pdv;

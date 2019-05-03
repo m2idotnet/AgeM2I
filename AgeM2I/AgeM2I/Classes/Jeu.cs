@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace AgeM2I.Classes
@@ -9,21 +11,62 @@ namespace AgeM2I.Classes
         public Royaume r;
         public Fabrique fabrique;
         public FabriqueAction fabriqueAction;
+        public string fileRoyaume;
 
         public void Init()
         {
-            r = new Royaume();
+            int choixInitial;
+            
+            do
+            {
+                Console.WriteLine("1-Nouveau royaume");
+                Console.WriteLine("2-Charger un royaume");
+                Console.WriteLine("0-Quitter");
+                choixInitial = Convert.ToInt32(Console.ReadLine());
+                switch(choixInitial)
+                {
+                    case 1:
+                        Console.Write("Nom du royaume : ");
+                        fileRoyaume = Console.ReadLine();
+                        r = new Royaume();
+                        Jouer("village");
+                        break;
+                    case 2:
+                        Console.Write("Nom du royaume : ");
+                        fileRoyaume = Console.ReadLine();
+                        r = new Royaume();
+                        if (File.Exists(fileRoyaume + ".txt"))
+                        {
+                            StreamReader reader = new StreamReader(fileRoyaume + ".txt");
+                            string contenuRoyaume = reader.ReadToEnd();
+                            reader.Close();
+                            JsonConvert.PopulateObject(contenuRoyaume,r);
+                            Jouer("");
+                            
+                        }
+                        break;
+                }
+            } while (choixInitial != 0);
+            
+        }
+
+        private void Jouer(string type)
+        {
             fabrique = new Fabrique();
             fabriqueAction = new FabriqueAction();
-            Village v = fabrique.FabriqueVillage();
-            v.Habitants.Add(fabrique.FabriqueVillageois("roturier"));
-            r.Villages.Add(v);
+            if (type == "village")
+            {
+                Village v = fabrique.FabriqueVillage();
+                v.Habitants.Add(fabrique.FabriqueVillageois("roturier"));
+                r.Villages.Add(v);
+            }
+            
             int choix;
             do
             {
                 Menu();
                 choix = Convert.ToInt32(Console.ReadLine());
-                switch(choix)
+                switch (choix)
                 {
                     case 1:
                         AfficherInfoRoyaume();
@@ -39,7 +82,7 @@ namespace AgeM2I.Classes
                         AfficherInfoRoyaume();
                         break;
                     case 4:
-                        if(r.PossibleImpot)
+                        if (r.PossibleImpot)
                             fabriqueAction.Creer(r, fabrique, "Action Impot");
                         r.PossibleImpot = false;
                         AfficherInfoRoyaume();
@@ -47,6 +90,11 @@ namespace AgeM2I.Classes
                     case 5:
                         fabriqueAction.Creer(r, fabrique, "Fin tour");
                         AfficherInfoRoyaume();
+                        break;
+                    case 0:
+                        StreamWriter writer = new StreamWriter(fileRoyaume + ".txt");
+                        writer.Write(JsonConvert.SerializeObject(r));
+                        writer.Close();
                         break;
                 }
 
