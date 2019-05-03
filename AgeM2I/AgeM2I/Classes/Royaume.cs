@@ -41,7 +41,7 @@ namespace AgeM2I.Classes
             {
                 decimal impot = v.Impot();
                 Caisse += impot;
-                tmp = impot;
+                tmp += impot;
             }
             Production = Production - tmp;
             
