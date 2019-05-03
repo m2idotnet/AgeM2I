@@ -9,9 +9,11 @@ namespace AgeM2I.Classes
         private int vie;
         protected decimal pdv;
         protected int capaciteMax;
+        private string nom;
 
         public int Vie { get => vie; set => vie = value; }
         public decimal Pdv { get => pdv; set => pdv = value; }
+        public string Nom { get => nom; set => nom = value; }
 
         public Villageois()
         {

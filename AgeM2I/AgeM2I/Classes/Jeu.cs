@@ -34,13 +34,12 @@ namespace AgeM2I.Classes
                     case 2:
                         Console.Write("Nom du royaume : ");
                         fileRoyaume = Console.ReadLine();
-                        r = new Royaume();
                         if (File.Exists(fileRoyaume + ".txt"))
                         {
                             StreamReader reader = new StreamReader(fileRoyaume + ".txt");
                             string contenuRoyaume = reader.ReadToEnd();
                             reader.Close();
-                            JsonConvert.PopulateObject(contenuRoyaume,r);
+                            r = JsonConvert.DeserializeObject<Royaume>(contenuRoyaume, new JsonSerializerSettings() { Converters = new JsonConverter[] { new VillageoisConverter() } });
                             Jouer("");
                             
                         }

@@ -6,9 +6,11 @@ namespace AgeM2I.Classes
 {
     public class Paysan : Roturier
     {
+        
         public Paysan()
         {
             capaciteMax = 400;
+            Nom = "P";
         }
 
         public override void Gain()
